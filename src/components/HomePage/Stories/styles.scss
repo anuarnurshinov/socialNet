@@ -1,0 +1,27 @@
+html, body {
+    margin: 0;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+    
+  }
+  
+  .container {
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .card {
+    flex-shrink: 0;
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }

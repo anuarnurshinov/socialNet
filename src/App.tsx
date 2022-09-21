@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import {
+  Container,
+  createTheme,
+  CssBaseline,
+  ThemeProvider,
+} from "@mui/material"
+import Grid from "@mui/material/Unstable_Grid2"
+import { Outlet } from "react-router-dom"
+import { AppMenu } from "./components/Menu/Menu"
+import { getDesignTokens } from "./themeOptions"
 
-function App() {
+export const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+})
+
+const App = () => {
+  const [mode, setMode] = React.useState<"light" | "dark">("light")
+
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"))
+      },
+    }),
+    []
+  )
+
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline>
+            <Grid container>
+              <AppMenu />
+              <Container sx={{ height: "100vh" }}>
+                <Outlet />
+              </Container>
+            </Grid>
+          </CssBaseline>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
+    </>
+  )
 }
 
-export default App;
+export default App
