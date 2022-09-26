@@ -5,15 +5,26 @@ import NewPostField from "./NewPostField/NewPostField"
 import Post from "./Post/Post"
 import Stories from "./Stories/Stories"
 import PhotoList from "./PhotoList/PhotoList"
+import NewPostContainer from "./NewPostField/NewPostContainer"
+import { useEffect } from "react"
+import PostContainer from "./Post/PostContainer"
+import { HomePageHeaderProps } from "./HomePageContainer"
 
-const HomePage = () => {
+const HomePage: React.FC<HomePageHeaderProps> = ({
+  getAllPostsThunk,
+  posts,
+}) => {
+  useEffect(() => {
+    getAllPostsThunk()
+  }, [])
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
         <Grid sx={{ p: 2 }} xs={9}>
           <Stories />
-          <NewPostField />
-          <Post />
+          <NewPostContainer />
+          {posts.map((item) => <PostContainer item={item} />).reverse()}
         </Grid>
         <Grid xs={3}>
           <FriendsRequests />

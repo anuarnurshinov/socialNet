@@ -7,8 +7,8 @@ import {
 } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
 import { Outlet } from "react-router-dom"
-import { AppMenu } from "./components/Menu/Menu"
 import { getDesignTokens } from "./themeOptions"
+import MenuContainer from "./components/Menu/MenuContainer"
 
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
@@ -34,7 +34,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <Grid container>
-              <AppMenu />
+              <MenuContainer />
               <Container sx={{ height: "100vh" }}>
                 <Outlet />
               </Container>

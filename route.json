@@ -1,0 +1,5 @@
+{
+  "/photos*": "/644/photos$1",
+  "/messages*": "/644/messages$1",
+  "/users/:id/photo": "/users/:id/?_embed=photo"
+}

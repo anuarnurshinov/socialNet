@@ -8,9 +8,22 @@ import {
   Typography,
 } from "@mui/material"
 import React from "react"
+import { useNavigate } from "react-router-dom"
 
-const UserProfileBtn = () => {
-  const settings = ["Profile", "Account", "Dashboard", "Logout"]
+interface IUserProfileBrnProps {
+  ownerPhoto: string
+  userId: number | null
+}
+
+const UserProfileBtn: React.FC<IUserProfileBrnProps> = ({
+  ownerPhoto,
+  userId,
+}) => {
+  const navigate = useNavigate()
+  const settings = [
+    { name: "Profile", link: `/profile/${userId}` },
+    { name: "Logout", link: "/logout" },
+  ]
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -22,12 +35,17 @@ const UserProfileBtn = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+  const handleGoToProfilePage = (link: string) => {
+    handleCloseUserMenu()
+    navigate(`${link}`)
+  }
+
   return (
     <>
       <Box sx={{ m: 1 }}>
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Remy Sharp" src={ownerPhoto} />
           </IconButton>
         </Tooltip>
         <Menu
@@ -47,8 +65,13 @@ const UserProfileBtn = () => {
           onClose={handleCloseUserMenu}
         >
           {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{setting}</Typography>
+            <MenuItem
+              key={setting.name}
+              onClick={() => {
+                handleGoToProfilePage(setting.link)
+              }}
+            >
+              <Typography textAlign="center">{setting.name}</Typography>
             </MenuItem>
           ))}
         </Menu>

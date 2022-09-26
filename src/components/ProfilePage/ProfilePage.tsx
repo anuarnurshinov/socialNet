@@ -1,18 +1,34 @@
-import { Avatar, Box, Button, Container, Typography } from "@mui/material"
+import { Box, Button, Container, Typography } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2"
 import BackgroundImage from "./BackgroundImage"
 
 import MailIcon from "@mui/icons-material/Mail"
-import NewPostField from "../HomePage/NewPostField/NewPostField"
-import Post from "../HomePage/Post/Post"
 import ProfileInfo from "./ProfileInfo"
 import MediaList from "./MediaList"
+import { IProfile } from "../../redux/typesForReducers"
+import AvatarForProfilePage from "./AvatarForProfilePage"
+import { useParams } from "react-router-dom"
+import { useEffect } from "react"
+import PostContainer from "../HomePage/Post/PostContainer"
+import NewPostContainer from "../HomePage/NewPostField/NewPostContainer"
+import { ProfilePageHeaderProps } from "./ProfilePageContainer"
 
-export const loader = async ({ params }: any) => {
-  console.log(params)
-}
+const ProfilePage: React.FC<ProfilePageHeaderProps> = ({
+  profile,
+  updatePhotoThunk,
+  accessToken,
+  getUserPhotoThunk,
+  getUserProfileThunk,
+  getUserPostsThunk,
+}) => {
+  const { userId } = useParams()
 
-const ProfilePage = () => {
+  useEffect(() => {
+    getUserPhotoThunk(Number(userId))
+    getUserProfileThunk(Number(userId))
+    getUserPostsThunk(Number(userId))
+  }, [userId])
+
   return (
     <Grid2>
       <Grid2 sx={{ p: 1 }}>
@@ -23,19 +39,17 @@ const ProfilePage = () => {
           <Grid2 container>
             <Grid2 xs={1}>
               <Box>
-                <Avatar
-                  src="https://aif-s3.aif.ru/images/011/857/f5ef0f2e2e55334bec4503294e0b6ae1.jpg"
-                  sx={{
-                    width: 85,
-                    height: 85,
-                    bottom: 40,
-                  }}
+                <AvatarForProfilePage
+                  userId={profile.id}
+                  userPhoto={profile.photo}
+                  updatePhotoThunk={updatePhotoThunk}
+                  accessToken={accessToken}
                 />
               </Box>
             </Grid2>
             <Grid2 sx={{ flexGrow: 1 }} xs={2}>
-              <Typography fontWeight={"bold"}>NickName</Typography>
-              <Typography>@useremail</Typography>
+              <Typography fontWeight={"bold"}>{profile.name}</Typography>
+              <Typography>{"@" + profile.name}</Typography>
             </Grid2>
             <Grid2>
               <Button variant="contained">Добавить</Button>
@@ -61,20 +75,17 @@ const ProfilePage = () => {
           >
             <Typography fontWeight={"bold"}>Обо мне:</Typography>
             <Box>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </Typography>
+              <Typography>{profile.aboutMe}</Typography>
               <ProfileInfo />
               <MediaList />
             </Box>
           </Container>
         </Grid2>
         <Grid2 sx={{ p: 1 }} xs={8}>
-          <NewPostField />
-          <Post />
+          <NewPostContainer />
+          {profile.posts
+            ?.map((item, index) => <PostContainer item={item} key={index} />)
+            .reverse()}
         </Grid2>
       </Grid2>
     </Grid2>

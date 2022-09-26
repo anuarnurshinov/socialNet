@@ -1,12 +1,40 @@
 import { Avatar, Box, Button, Container, Typography } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2"
 import OptionsBtn from "../NewPostField/OptionsBtn"
-import Text from "./PostText"
-import PostImage from "./PostImage"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import ThumbDownIcon from "@mui/icons-material/ThumbDown"
 import ShareIcon from "@mui/icons-material/Share"
-const Post = () => {
+import { formatDate } from "../NewPostField/Dater"
+import { profilePageAPI } from "../../../API/profilePageAPI"
+import { useEffect, useState } from "react"
+import { InsertEmoticonSharp } from "@mui/icons-material"
+import { PostHeaderProps } from "./PostContainer"
+
+interface IItem {
+  author: string
+  id: number
+  image: string
+  text: string
+  title: string
+  userId: number
+  creationTime: string
+  likes: number
+  dislikes: number
+}
+
+export interface IPostProps {
+  item: IItem
+}
+
+const Post: React.FC<PostHeaderProps> = ({ item, ownerPhoto }) => {
+  const [userPhoto, setUserPhoto] = useState("")
+  useEffect(() => {
+    profilePageAPI
+      .getUserPhoto(item.userId)
+      .then((response: any) => response.photo)
+      .then((response: any) => setUserPhoto(`${response}`))
+  }, [item, ownerPhoto])
+
   return (
     <Grid2
       sx={{
@@ -21,11 +49,13 @@ const Post = () => {
       <Grid2>
         <Grid2 sx={{ mb: 1 }} container>
           <Grid2 xs={0.8}>
-            <Avatar sx={{}} />
+            <Avatar src={`${userPhoto}`} />
           </Grid2>
           <Grid2 xs={2.2}>
-            <Typography fontWeight={"bold"}>NickName</Typography>
-            <Typography fontWeight={"light"}>22 min ago</Typography>
+            <Typography fontWeight={"bold"}>{item.author}</Typography>
+            <Typography fontWeight={"light"}>
+              {formatDate(new Date(item.creationTime))}
+            </Typography>
           </Grid2>
           <Grid2 sx={{ textAlign: "-webkit-right", mt: -1 }} xs={9}>
             <OptionsBtn />
@@ -33,21 +63,27 @@ const Post = () => {
         </Grid2>
       </Grid2>
       <Grid2>
-        <Text />
+        <Typography>{item.text}</Typography>
       </Grid2>
       <Box sx={{ mt: 1, mb: 1, textAlign: "center" }}>
-        <PostImage />
+        <Box sx={{ p: 1 }}>
+          <img
+            alt=""
+            style={{ borderRadius: "10px", width: "-webkit-fill-available" }}
+            src={item.image}
+          />
+        </Box>
       </Box>
       <Grid2 sx={{ position: "absolute", bottom: 5 }}>
         <Box>
           <Button color="info">
             <ThumbUpIcon />
           </Button>
-          0
+          {item.likes}
           <Button color="info">
             <ThumbDownIcon />
           </Button>
-          0
+          {item.dislikes}
           <Button color="info">
             <ShareIcon />
           </Button>

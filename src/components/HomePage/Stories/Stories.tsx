@@ -52,9 +52,9 @@ const Stories = () => {
           >
             <PlusIconForAddingStory />
           </animated.div>
-          {movies.map((src) => (
+          {movies.map((src, index) => (
             <animated.div
-              key={src}
+              key={index}
               className="card"
               style={{
                 ...style,

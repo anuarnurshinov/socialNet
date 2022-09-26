@@ -10,7 +10,7 @@ import Grid2 from "@mui/material/Unstable_Grid2"
 import PushPinIcon from "@mui/icons-material/PushPin"
 import { useNavigate } from "react-router-dom"
 
-const DialogsPage = () => {
+const DialogsPage = (props: any) => {
   const style = {
     width: "100%",
     bgcolor: "background.paper",

@@ -2,10 +2,14 @@ import { createBrowserRouter } from "react-router-dom"
 import AppContainer from "./AppContainer"
 import HomePage from "./components/HomePage/HomePage"
 import MainPage from "./components/MainPage/MainPage"
-import ProfilePage from "./components/ProfilePage/ProfilePage"
-import { loader as profileLoader } from "./components/ProfilePage/ProfilePage"
-import DialogsPage from "./components/DialogsPage/DialogsPage"
+
 import Messages from "./components/DialogsPage/Messages/Messages"
+import ProfilePageContainer from "./components/ProfilePage/ProfilePageContainer"
+import DialogsPageContainer from "./components/DialogsPage/DialogsPageContainer"
+import AuthPageContainer from "./components/AuthPage/AuthPageContainer"
+import HomePageContainer from "./components/HomePage/HomePageContainer"
+import UsersPage from "./components/UsersPage/UsersPage"
+import UsersPageContainer from "./components/UsersPage/UsersPageContainer"
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -14,24 +18,35 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        element: <HomePage />,
+        element: <HomePageContainer />,
       },
       {
         path: "/",
-        element: <HomePage />,
+        element: <HomePageContainer />,
       },
       {
-        path: "/:id",
-        loader: profileLoader,
-        element: <ProfilePage />,
+        path: "profile/:userId",
+        element: <ProfilePageContainer />,
       },
       {
         path: "/dialogs",
-        element: <DialogsPage />,
+        element: <DialogsPageContainer />,
       },
       {
-        path: "/dialogs/:id",
+        path: "/dialogs/:dialogId",
         element: <Messages />,
+      },
+      {
+        path: "/login",
+        element: <AuthPageContainer />,
+      },
+      {
+        path: "/register",
+        element: <AuthPageContainer />,
+      },
+      {
+        path: "/profile",
+        element: <UsersPageContainer />,
       },
     ],
   },

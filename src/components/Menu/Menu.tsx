@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Button,
 } from "@mui/material"
 import { DarkModBtn } from "./MenuItems/DarkModBtn"
 import IconMenuButtons from "./MenuItems/IconMenuButtons"
@@ -21,56 +22,24 @@ import ChatBtn from "./MenuItems/ChatBtn"
 import UserProfileBtn from "./MenuItems/UserProfileBtn"
 import React from "react"
 import MenuIcon from "@mui/icons-material/Menu"
+import { useNavigate } from "react-router-dom"
+import {
+  searchFieldStyleForXS,
+  logoIconStyle0ForMD,
+  logoTextStyleForMD,
+  logoTextStyleForXS,
+  logoIconStyle0ForXS,
+  searchFieldStyleForMD,
+  iconMenuStyleForMD,
+} from "./StylesForMenu"
+import { AppMenuHeaderProps } from "./MenuContainer"
 
-const logoTextStyleForMD = {
-  fontWeight: "bold",
-  mr: 2,
-  display: { xs: "none", md: "flex" },
-}
-const logoTextStyleForXS = {
-  display: { xs: "flex", md: "none" },
-  flexGrow: 0,
-}
-const logoIconStyle0ForMD = {
-  fontSize: "50px",
-  display: { xs: "none", md: "flex" },
-}
-const logoIconStyle0ForXS = {
-  fontSize: "20px",
-  display: { xs: "flex", md: "none" },
-  mr: 1,
-  flexGrow: { md: "none", xs: 2 },
-}
-const iconMenuStyleForMD = {
-  ml: 2,
-  flexGrow: 1,
-  display: {
-    xs: "none",
-    md: "flex",
-  },
-}
-const searchFieldStyleForMD = {
-  display: {
-    xs: "none",
-    md: "flex",
-  },
-}
-const searchFieldStyleForXS = {
-  display: {
-    xs: "flex",
-    md: "none",
-  },
-}
-
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window
-}
-
-export const AppMenu: React.FC<Props> = ({ window }) => {
+export const AppMenu: React.FC<AppMenuHeaderProps> = ({
+  ownerPhoto,
+  isAuth,
+  userId,
+}) => {
+  const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -96,8 +65,6 @@ export const AppMenu: React.FC<Props> = ({ window }) => {
       </Box>
     </>
   )
-  const container =
-    window !== undefined ? () => window().document.body : undefined
 
   return (
     <AppBar sx={{ mb: 1 }} position="static">
@@ -114,7 +81,6 @@ export const AppMenu: React.FC<Props> = ({ window }) => {
           </IconButton>
           <Box component="nav">
             <Drawer
-              container={container}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
@@ -153,7 +119,21 @@ export const AppMenu: React.FC<Props> = ({ window }) => {
             <DarkModBtn />
             <NotificationBtn />
             <ChatBtn />
-            <UserProfileBtn />
+
+            {isAuth ? (
+              <UserProfileBtn ownerPhoto={ownerPhoto} userId={userId} />
+            ) : (
+              <Button
+                sx={{ height: "50%", mt: "auto", mb: "auto" }}
+                variant="contained"
+                onClick={() => {
+                  navigate("/login")
+                }}
+              >
+                {" "}
+                Войти{" "}
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>
