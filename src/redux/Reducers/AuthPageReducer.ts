@@ -29,12 +29,12 @@ export const registerThunk =
   (data: IAuthData): AppThunkType =>
   async (dispatch) => {
     let response = await authPageAPI.register(data)
-    await profilePageAPI.createEmptyPhotoTemplate(response.id)
+    await profilePageAPI.createEmptyPhotoTemplate(response.user.id)
     dispatch(updateAccessToken(response.accessToken))
     dispatch(updateOwnerProfile(response.user))
     dispatch(toggleAuthFlag(true))
-    response = await profilePageAPI.getUserPhoto(response.user.id)
-    dispatch(updateOwnerPhoto(response.photo))
+    let userPhoto = await profilePageAPI.getUserPhoto(response.user.id)
+    dispatch(updateOwnerPhoto(userPhoto.photo))
   }
 export const logInThunk =
   (data: IAuthData): AppThunkType =>

@@ -78,7 +78,6 @@ export const updatePhotoThunk =
 export const getUserProfileThunk =
   (userId: number) => async (dispatch: Dispatch) => {
     let response = await profilePageAPI.getUserProfile(userId)
-    console.log(response)
 
     dispatch(getUserProfile(response))
   }

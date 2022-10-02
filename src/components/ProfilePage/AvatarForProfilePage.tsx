@@ -14,7 +14,7 @@ interface IAvatarProps {
   updatePhotoThunk: (data: {}, accessToken: string, id: number | null) => {}
   userId: number | null
   accessToken: string
-  userPhoto: string
+  userPhoto: string | undefined
 }
 
 const AvatarForProfilePage: React.FC<IAvatarProps> = ({

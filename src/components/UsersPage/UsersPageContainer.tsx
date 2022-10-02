@@ -2,9 +2,12 @@ import { RootStateType } from "../../redux/store"
 import { connect, ConnectedProps } from "react-redux/"
 import UsersPage from "./UsersPage"
 import { compose } from "redux"
+import { getAllUsersThunk } from "../../redux/Reducers/UsersPageReducer"
 
-const mapStateToProps = (state: RootStateType) => {}
-const mapDispatchToProps = {}
+const mapStateToProps = (state: RootStateType) => ({
+  users: state.usersPage.users,
+})
+const mapDispatchToProps = { getAllUsersThunk }
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 

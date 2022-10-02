@@ -23,7 +23,6 @@
       "id": 2
     }
   ],
-  "comments": [],
   "users": [
     {
       "email": "anuarnurshinov@gmail.com",
@@ -38,11 +37,39 @@
       "name": "Зархошева",
       "surname": "Феруза",
       "id": 2
+    },
+    {
+      "email": "aboba@gmail.com",
+      "password": "$2a$10$CSWggJeTBT64KrkNwbgKI.U6JEAMfU3n/NNgCZ8UUb5rd63dyXyzS",
+      "name": "Иван",
+      "surname": "Пупкин",
+      "id": 3
+    },
+    {
+      "email": "baloba@gmail.com",
+      "password": "$2a$10$CSWggJeTBT64KrkNwbgKI.U6JEAMfU3n/NNgCZ8UUb5rd63dyXyzS",
+      "name": "Дмитрий",
+      "surname": "Пригожин",
+      "id": 4
+    },
+    {
+      "email": "anuarnurshinov2@gmail.com",
+      "password": "$2a$10$7R0lkgP0ckon6XN1y.mq6uWj9weqlRxai0zE0RsVDNyDg6tFxW8ty",
+      "name": "Ануар",
+      "surname": "Нуршинов",
+      "id": 5
+    },
+    {
+      "email": "exaple@mail.com",
+      "password": "$2a$10$lUHxOfWu6ZlicKdzRWzbV.Tl9Ay/7TueiHjVSWeXSwbHIJYfhsYFa",
+      "name": "Иван",
+      "surname": "Пупкин",
+      "id": 6
     }
   ],
   "userPhotos": [
     {
-      "photo": "https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg",
+      "photo": "https://klike.net/uploads/posts/2019-03/1551511801_1.jpg",
       "userId": 1,
       "id": 1
     },
@@ -50,12 +77,63 @@
       "photo": "https://mirpozitiva.ru/wp-content/uploads/2019/11/1472042660_10.jpg",
       "userId": 2,
       "id": 2
+    },
+    {
+      "photo": "https://klike.net/uploads/posts/2019-03/1551511801_1.jpg",
+      "userId": 3,
+      "id": 3
+    },
+    {
+      "photo": "https://klike.net/uploads/posts/2019-03/1551511801_1.jpg",
+      "userId": 4,
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
     }
   ],
   "dialogs": [
     {
-      "userId": 1,
-      "dialogList": {}
+      "id": 1,
+      "firstUser": 1,
+      "secondUser": 2
+    }
+  ],
+  "messages": [
+    {
+      "dialogId": 1,
+      "senderId": 1,
+      "receiverId": 2,
+      "creationTime": "2022-09-27T12:49:27.710Z",
+      "text": "Пример сообщения",
+      "id": 1
+    },
+    {
+      "dialogId": 1,
+      "senderId": 1,
+      "receiverId": 2,
+      "creationTime": "2022-09-27T12:49:36.944Z",
+      "text": "Новое сообщение",
+      "id": 2
+    },
+    {
+      "dialogId": 1,
+      "senderId": 1,
+      "receiverId": 2,
+      "creationTime": "2022-09-27T12:51:38.654Z",
+      "text": "Привет",
+      "id": 3
+    },
+    {
+      "dialogId": 1,
+      "senderId": 1,
+      "receiverId": 2,
+      "creationTime": "2022-09-27T12:54:15.095Z",
+      "text": "Новое сообщение",
+      "id": 4
     }
   ]
 }

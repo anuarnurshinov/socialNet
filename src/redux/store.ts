@@ -3,6 +3,7 @@ import authPageReducer from "./Reducers/AuthPageReducer"
 import profilePageReducer from "./Reducers/ProfilePageReducer"
 import homePageReducer from "./Reducers/HomePageReducer"
 import usersPageReducer from "./Reducers/UsersPageReducer"
+import dialogsPageReducer from "./Reducers/DialogsPageReducer"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     authPage: authPageReducer,
     homePage: homePageReducer,
     usersPage: usersPageReducer,
+    dialogsPage: dialogsPageReducer,
   },
 })
 

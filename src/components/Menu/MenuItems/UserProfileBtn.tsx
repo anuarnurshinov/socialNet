@@ -11,7 +11,7 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 
 interface IUserProfileBrnProps {
-  ownerPhoto: string
+  ownerPhoto: string | undefined
   userId: number | null
 }
 
@@ -21,7 +21,7 @@ const UserProfileBtn: React.FC<IUserProfileBrnProps> = ({
 }) => {
   const navigate = useNavigate()
   const settings = [
-    { name: "Profile", link: `/profile/${userId}` },
+    { name: "Profile", link: `/users/${userId}` },
     { name: "Logout", link: "/logout" },
   ]
 

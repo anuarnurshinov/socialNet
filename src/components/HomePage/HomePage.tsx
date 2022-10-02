@@ -24,7 +24,9 @@ const HomePage: React.FC<HomePageHeaderProps> = ({
         <Grid sx={{ p: 2 }} xs={9}>
           <Stories />
           <NewPostContainer />
-          {posts.map((item) => <PostContainer item={item} />).reverse()}
+          {posts
+            .map((item, index) => <PostContainer item={item} key={index} />)
+            .reverse()}
         </Grid>
         <Grid xs={3}>
           <FriendsRequests />

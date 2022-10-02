@@ -10,6 +10,7 @@ import AuthPageContainer from "./components/AuthPage/AuthPageContainer"
 import HomePageContainer from "./components/HomePage/HomePageContainer"
 import UsersPage from "./components/UsersPage/UsersPage"
 import UsersPageContainer from "./components/UsersPage/UsersPageContainer"
+import MessagesContainer from "./components/DialogsPage/Messages/MessagesContainer"
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
         element: <HomePageContainer />,
       },
       {
-        path: "profile/:userId",
+        path: "users/:userId",
         element: <ProfilePageContainer />,
       },
       {
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dialogs/:dialogId",
-        element: <Messages />,
+        element: <MessagesContainer />,
       },
       {
         path: "/login",
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
         element: <AuthPageContainer />,
       },
       {
-        path: "/profile",
+        path: "/users",
         element: <UsersPageContainer />,
       },
     ],

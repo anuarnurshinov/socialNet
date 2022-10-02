@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AppThunkType } from "../store"
 import { HomePageState } from "../typesForReducers"
-import { authPageAPI, IAuthData } from "../../API/authPageAPI"
-import { HomePageAPI } from "../../API/homePageAPI"
+import { homePageAPI } from "../../API/homePageAPI"
 
 const initialState: HomePageState = {
   posts: [],
@@ -21,7 +20,7 @@ export const homePageReducer = createSlice({
 export const { updatePosts } = homePageReducer.actions
 
 export const getAllPostsThunk = (): AppThunkType => async (dispatch) => {
-  let response = await HomePageAPI.getAllPosts()
+  let response = await homePageAPI.getAllPosts()
   dispatch(updatePosts(response))
 }
 

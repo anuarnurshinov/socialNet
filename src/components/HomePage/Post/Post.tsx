@@ -5,10 +5,8 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import ThumbDownIcon from "@mui/icons-material/ThumbDown"
 import ShareIcon from "@mui/icons-material/Share"
 import { formatDate } from "../NewPostField/Dater"
-import { profilePageAPI } from "../../../API/profilePageAPI"
-import { useEffect, useState } from "react"
-import { InsertEmoticonSharp } from "@mui/icons-material"
 import { PostHeaderProps } from "./PostContainer"
+import { UserAvatar } from "../../common/UserAvatar"
 
 interface IItem {
   author: string
@@ -27,14 +25,6 @@ export interface IPostProps {
 }
 
 const Post: React.FC<PostHeaderProps> = ({ item, ownerPhoto }) => {
-  const [userPhoto, setUserPhoto] = useState("")
-  useEffect(() => {
-    profilePageAPI
-      .getUserPhoto(item.userId)
-      .then((response: any) => response.photo)
-      .then((response: any) => setUserPhoto(`${response}`))
-  }, [item, ownerPhoto])
-
   return (
     <Grid2
       sx={{
@@ -49,7 +39,7 @@ const Post: React.FC<PostHeaderProps> = ({ item, ownerPhoto }) => {
       <Grid2>
         <Grid2 sx={{ mb: 1 }} container>
           <Grid2 xs={0.8}>
-            <Avatar src={`${userPhoto}`} />
+            <UserAvatar userId={item.id} anotherDependency={ownerPhoto} />
           </Grid2>
           <Grid2 xs={2.2}>
             <Typography fontWeight={"bold"}>{item.author}</Typography>

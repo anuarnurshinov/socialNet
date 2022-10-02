@@ -81,7 +81,7 @@ const AuthPageContainer: React.FC<HeaderProps> = ({
   }
 
   if (isAuth) {
-    return <Navigate to={`/profile/${userId}`} />
+    return <Navigate to={`/users/${userId}`} />
   }
   if (match) {
     return (

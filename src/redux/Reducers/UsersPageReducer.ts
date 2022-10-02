@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AppThunkType } from "../store"
 import { UsersPageState } from "../typesForReducers"
+import { usersPageAPI } from "../../API/usersPageAPI"
 
 const initialState: UsersPageState = {
   users: [],
@@ -18,6 +19,9 @@ export const usersPageReducer = createSlice({
 
 export const { updateUsers } = usersPageReducer.actions
 
-export const getAllUsersThunk = (): AppThunkType => async (dispatch) => {}
+export const getAllUsersThunk = (): AppThunkType => async (dispatch) => {
+  const response = await usersPageAPI.getAllPosts()
+  dispatch(updateUsers(response))
+}
 
 export default usersPageReducer.reducer

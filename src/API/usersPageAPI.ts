@@ -1,8 +1,8 @@
 import { instance, unPacking } from "./common"
 
-export const HomePageAPI = {
+export const usersPageAPI = {
   async getAllPosts() {
-    const response = await instance.get(`posts`)
+    const response = await instance.get(`users`)
     return unPacking(response)
   },
 }

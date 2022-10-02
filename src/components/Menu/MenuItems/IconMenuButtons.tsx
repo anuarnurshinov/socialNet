@@ -29,12 +29,12 @@ const IconMenuButtons = () => {
       <NavLink to="/home">
         {({ isActive }) => IconBtnsPrint(isActive, HomeIcon)}
       </NavLink>
-      <NavLink to="/profile">
+      <NavLink to="/users">
         {({ isActive }) => IconBtnsPrint(isActive, PersonIcon)}
       </NavLink>
-      <NavLink to="/dialogs">
+      {/* <NavLink to="/dialogs">
         {({ isActive }) => IconBtnsPrint(isActive, ChatBubbleIcon)}
-      </NavLink>
+      </NavLink> */}
     </>
   )
 }
